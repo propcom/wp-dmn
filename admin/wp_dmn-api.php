@@ -48,6 +48,11 @@
     private $post_fields = null;
 
     /*
+    * @response_headers
+    */
+    private $response_headers = [];
+
+    /*
     * @api_data
     */
     private $api_data = null;
@@ -64,15 +69,15 @@
 
       try {
 
-        if($venue_id) {
+        if(!$this->is_options_valid()) {
+
+          $this->report_error('DMN Settings are not setup correctly, so we have disabled widget on FE');
+
+        } else {
 
           $this->setup_headers();
           $this->api_ready = true;
 
-        } else {
-          if(!$this->is_options_valid()) {
-            $this->report_error('DMN Settings are not setup correctly, so we have disabled widget on FE');
-          }
         }
 
       } catch (Wordpress_DMN_Api_Exception $ex) {}
@@ -100,7 +105,7 @@
         'Authorization' => get_option ('prop_dmn')['uid'].':'.get_option ('prop_dmn')['api_key']
       ];
 
-      $this->endpoints['availability'] = null;
+      $this->endpoints['availability'] = $this->api_url . '/bookings';
       if($this->venue_id) {
         $this->endpoints['availability'] = $this->api_url . '/venues/' . $this->venue_id . '/booking-availability';
       }
@@ -138,6 +143,8 @@
             $this->api_data['code'] = $api_repsonse['response']['code'];
             $this->api_data['message'] = $api_repsonse['response']['message'];
             $this->api_data['data'] = $api_repsonse['body'];
+
+            $this->response_headers = $api_repsonse['headers'];
 
           }
 
@@ -178,6 +185,13 @@
 
       return $return;
 
+    }
+
+    /*
+    * @get_rate_limits
+    */
+    public function get_rate_limits () {
+      // get api rate limits
     }
 
     /*

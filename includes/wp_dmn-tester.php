@@ -9,20 +9,15 @@
 
     public function test () {
 
-      // check options are set
+      $dmn_api = Wordpress_DMN_Api::forge();
 
-      if(!$this->is_options_valid()) {
+      // check options are set
+      if($dmn_api->is_setup()) {
+
+      } else {
         echo sprintf('<div class="notice notice-error is-dismissible"><p>%s</p></div>', 'Settings are not setup, please do this and try again');
       }
 
-    }
-
-    private function is_options_valid () {
-
-      if( !get_option ('prop_dmn')['api_key'] ) return false;
-      if( !get_option ('prop_dmn')['uid'] ) return false;
-
-      return true;
     }
 
     public static function forge () {
