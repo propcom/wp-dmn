@@ -109,6 +109,11 @@
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/wp_dmn-i18n.php';
 
 			/**
+			 * The class responsible for constructing returned data from api.
+			 */
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/wp_dmn-booker-class.php';
+
+			/**
 			 * The class responsible for defining all actions that occur in the admin area.
 			 */
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wp_dmn-admin.php';

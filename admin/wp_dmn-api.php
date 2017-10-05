@@ -10,7 +10,7 @@
     /*
     * @api_url
     */
-    private $api_url = 'https://api.designmynight.com/v4/';
+    private $api_url = 'https://api.designmynight.com/v4';
 
     /*
     * @method
@@ -106,8 +106,11 @@
       ];
 
       $this->endpoints['availability'] = $this->api_url . '/bookings';
+
       if($this->venue_id) {
         $this->endpoints['availability'] = $this->api_url . '/venues/' . $this->venue_id . '/booking-availability';
+      } else {
+        $this->api_method = 'GET';
       }
 
       $this->wp_args['headers'] = $this->api_headers;
@@ -136,13 +139,17 @@
 
         if(($url = $this->endpoints['availability'])) {
 
-          $api_repsonse = $this->post_data($url);
+          if($this->api_method == 'POST') {
+            $api_repsonse = $this->post_data($url);
+          } else {
+            $api_repsonse = $this->get_data($url);
+          }
 
           if(isset($api_repsonse['response']) && isset($api_repsonse['body'])) {
 
             $this->api_data['code'] = $api_repsonse['response']['code'];
             $this->api_data['message'] = $api_repsonse['response']['message'];
-            $this->api_data['data'] = $api_repsonse['body'];
+            $this->api_data['data'] = json_encode($api_repsonse['body']);
 
             $this->response_headers = $api_repsonse['headers'];
 
@@ -188,10 +195,58 @@
     }
 
     /*
+    * @get_data
+    */
+    private function get_data ($url) {
+
+      $return = null;
+
+      if($url && isset($this->wp_args['headers'])) {
+
+        $response = wp_remote_get($url, $this->wp_args);
+
+        if(!is_wp_error($response)) {
+
+          $return = $response;
+
+        } else {
+          throw new Wordpress_DMN_Api_Exception('Error Occurred: ' . $response->get_error_message());
+        }
+
+      }
+
+      return $return;
+
+    }
+
+    /*
     * @get_rate_limits
     */
     public function get_rate_limits () {
-      // get api rate limits
+
+      $api_limit_lim_headers = (isset($this->response_headers['x-ratelimit-limit']) ? $this->response_headers['x-ratelimit-limit'] : null);
+      $api_limit_rem_headers = (isset($this->response_headers['x-ratelimit-remaining']) ? $this->response_headers['x-ratelimit-remaining'] : null);
+      $api_limit_res_headers = (isset($this->response_headers['x-ratelimit-reset']) ? $this->response_headers['x-ratelimit-reset'] : null);
+
+      if($api_limit_lim_headers) {
+
+        $std = new stdClass();
+        $std->limit = $api_limit_lim_headers;
+        $std->remaining = $api_limit_rem_headers;
+        $std->reset_date = date_i18n('l, F j Y', strtotime($api_limit_res_headers));
+        $std->reset_time = date_i18n('H:i A', strtotime($api_limit_res_headers));
+
+        return $std;
+
+      }
+
+    }
+
+    /*
+    * @booking
+    */
+    public function booking () {
+      return (isset($this->api_data['data']) ? new Booking_Class($this->api_data['data']) : null);
     }
 
     /*
