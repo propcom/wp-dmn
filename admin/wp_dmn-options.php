@@ -162,6 +162,22 @@
 
 			);
 
+			add_settings_field(
+
+				'venue_id',
+				'DMN Venue Id',
+				[ $this, 'add_field' ],
+				'dmn-manager',
+				'dmn_settings',
+				[
+					'name'    => 'venue_id',
+					'type'    => 'text',
+					'setting' => 'dmn',
+					'note' => 'Provide you DMN Venue Id, this is required to start your custom widget',
+				]
+
+			);
+
 		}
 
 		function add_field( array $args ) {
