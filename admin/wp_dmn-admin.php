@@ -71,13 +71,13 @@
 
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/wp_dmn-exception.php';
 
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wp_dmn-api.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/api/wp_dmn-api.php';
 
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/wp_dmn-tester.php';
 
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wp_dmn-options.php';
 
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wp_dmn-rest.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/api/wp_dmn-rest.php';
 
 		}
 
