@@ -109,14 +109,34 @@
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/wp_dmn-i18n.php';
 
 			/**
+			 * The class responsible for handing action on payload.
+			 */
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/classes/wp_dmn-action-handler.php';
+
+			/**
+			 * The class responsible for returning booking types on payload.
+			 */
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/classes/wp_dmn-booking-types.php';
+
+			/**
+			 * The class responsible for handing capacity on payload.
+			 */
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/classes/wp_dmn-capacity-handler.php';
+
+			/**
 			 * The class responsible for constructing returned data from api.
 			 */
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/wp_dmn-booker-class.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/classes/wp_dmn-booker-class.php';
 
 			/**
 			 * The class responsible for defining all actions that occur in the admin area.
 			 */
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wp_dmn-admin.php';
+
+			/**
+			 * The class responsible for defining all actions functions on the front end
+			 */
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/wp_dmn-fe-api.php';
 
 			/**
 			 * The class responsible for defining all actions that occur in the public-facing
