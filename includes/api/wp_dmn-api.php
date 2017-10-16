@@ -169,7 +169,7 @@
 
       if($url && isset($this->wp_args['headers'])) {
 
-        if($this->post_fields) {
+        if($this->post_fields && is_array($this->post_fields) && !empty($this->post_fields)) {
           $this->wp_args['body'] = json_encode($this->post_fields);
         }
 
