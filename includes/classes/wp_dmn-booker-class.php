@@ -75,6 +75,68 @@
     }
 
     /*
+    * @dates
+    */
+    public function dates ($future = null) {
+
+      if(!$this->availability || $this->is_api_error()) {
+        return null;
+      }
+
+      return Dates::forge($this->availability, $future);
+
+    }
+
+    /*
+    * @times
+    */
+    public function times ($future = null) {
+
+      if(!$this->availability || $this->is_api_error()) {
+        return null;
+      }
+
+      return Times::forge($this->availability, $future);
+
+    }
+
+    /*
+    * @duration
+    */
+    public function duration () {
+
+      if(!$this->availability || $this->is_api_error()) {
+        return null;
+      }
+
+      return Duration_Times::forge($this->availability);
+
+    }
+
+    /*
+    * @booking_details
+    */
+    public function booking_details () {
+
+      $details = [];
+
+      if(!$this->availability || $this->is_api_error()) {
+        return null;
+      }
+
+      if(isset($this->availability->bookingDetails)) {
+
+        foreach($this->availability->bookingDetails as $key => $detail) {
+          if($key != 'venue_id' && $key != 'venue_group') $details[$key] = $detail;
+        }
+
+      }
+
+      return $details;
+
+    }
+
+    /*
     * @is_api_error
     */
     private function is_api_error () {

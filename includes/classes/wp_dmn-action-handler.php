@@ -30,7 +30,7 @@
     ];
 
     /*
-    * @actions
+    * @user_actions
     */
     private $user_actions = [
 

@@ -124,6 +124,21 @@
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/classes/wp_dmn-capacity-handler.php';
 
 			/**
+			 * The class responsible for returning dates on payload.
+			 */
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/classes/wp_dmn-dates.php';
+
+			/**
+			 * The class responsible for returning times on payload.
+			 */
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/classes/wp_dmn-times.php';
+
+			/**
+			 * The class responsible for returning duration times on payload.
+			 */
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/classes/wp_dmn-duration-times.php';
+
+			/**
 			 * The class responsible for constructing returned data from api.
 			 */
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/classes/wp_dmn-booker-class.php';
