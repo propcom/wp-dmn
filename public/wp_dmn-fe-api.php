@@ -126,6 +126,13 @@
     }
 
     /*
+    * @submit_booking
+    */
+    public function submit_booking () {
+      return $this->dmn_api->booking()->submit_booking();
+    }
+
+    /*
     * @forge
     */
     public static function forge () {

@@ -137,6 +137,23 @@
     }
 
     /*
+    * @submit_booking
+    */
+    public function submit_booking () {
+
+      if(!$this->availability || $this->is_api_error()) {
+        return null;
+      }
+
+      if(isset($this->availability->next) && isset($this->availability->next->web)) {
+        return $this->availability->next->web;
+      }
+
+      return null;
+
+    }
+
+    /*
     * @is_api_error
     */
     private function is_api_error () {

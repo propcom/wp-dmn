@@ -14,49 +14,40 @@
 
       $version = '1';
       $namespace = 'dmn/v' . $version;
-      $base = 'widget';
+      $base = 'booking';
 
-      register_rest_route( $namespace, '/' . $base . '/(?P<id>[a-zA-Z|0-9]+)', [
-
+      register_rest_route( $namespace, '/'.$base, [
         [
           'methods' => WP_REST_Server::READABLE,
-          'callback' => [ $this, 'get_booking' ],
+          'callback' => [ $this, 'get_booking_types' ],
           'args' => [
-
             'id' => [
-
               'validate_callback' => function ( $param, $request, $key ) {
-
-								return is_numeric( $param );
-
-							}
-
+  							return !is_null( $param );
+  						}
             ]
-
           ],
-
         ],
-
       ] );
 
     }
 
     /**
-     * Get the booking info from DMN
+     * Get the booking types from DMN
      */
-    public function get_booking ( $request ) {
+    public function get_booking_types ( $request ) {
 
       if( $request ) {
 
-        $dmn = Wordpress_DMN_Api::forge($request->get_param('id'));
+        $dmn = WP_DMN::forge();
 
-        if($dmn->is_setup()) {
+        if($dmn->is_ready()) {
 
           $data = [
 
             'status' => 'success',
             'code' => 200,
-            'data' => $dmn->submit()->get_raw_data(),
+            'data' => $dmn->request()->get_booking_types(),
 
           ];
 
