@@ -126,7 +126,7 @@
         }
 
         if(isset($request->get_json_params()['date'])) {
-          $responseData = $dmn->dates(true)->get_dates();
+          $responseData = $dmn->dates()->is_date_available($request->get_json_params()['date']);
         }
 
         if(isset($request->get_json_params()['time'])) {
