@@ -88,15 +88,17 @@
       if( $request ) {
 
         $responseData = [];
+        $responseDataKey = 'data';
+
         $dmn = WP_DMN::forge();
 
         // check body params - Add needed fields
-        if(isset($request->get_json_params()['typeId'])) {
-          $dmn->add_field('type', $request->get_json_params()['typeId']);
+        if(isset($request->get_json_params()['type'])) {
+          $dmn->add_field('type', $request->get_json_params()['type']);
         }
 
-        if(isset($request->get_json_params()['num'])) {
-          $dmn->add_field('num_people', $request->get_json_params()['num']);
+        if(isset($request->get_json_params()['num_people'])) {
+          $dmn->add_field('num_people', $request->get_json_params()['num_people']);
         }
 
         if(isset($request->get_json_params()['date'])) {
@@ -115,20 +117,25 @@
         $dmn->request();
 
         // check body params - To return the needed data
-        if(isset($request->get_json_params()['typeId'])) {
+        if(isset($request->get_json_params()['type'])) {
           $responseData = $dmn->dates(true)->get_dates();
         }
 
-        if(isset($request->get_json_params()['typeId'])) {
+        if(isset($request->get_json_params()['num_people'])) {
+          $responseData = $dmn->get_capacity($request->get_json_params()['num_people']);
+        }
+
+        if(isset($request->get_json_params()['date'])) {
           $responseData = $dmn->dates(true)->get_dates();
         }
 
         if(isset($request->get_json_params()['time'])) {
-          $responseData = $dmn->duration()->get_times();
+          $responseData = $dmn->times()->get_times();
         }
 
-        if(isset($request->get_json_params()['duration'])) {
+        if(isset($request->get_query_params()['submit'])) {
           $responseData = $dmn->submit_booking();
+          $responseDataKey = 'next';
         }
 
         // return submited deets so far
@@ -142,7 +149,7 @@
 
             'status' => 'success',
             'code' => 200,
-            'data' => $responseData,
+            $responseDataKey => $responseData,
 
           ];
 
