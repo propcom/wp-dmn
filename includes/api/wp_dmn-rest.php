@@ -118,29 +118,37 @@
 
         // check body params - To return the needed data
         if(isset($request->get_json_params()['type'])) {
-          $responseData = $dmn->dates(true)->get_dates();
+          $responseData['types'] = $dmn->get_booking_types();
         }
 
         if(isset($request->get_json_params()['num_people'])) {
-          $responseData = $dmn->get_capacity($request->get_json_params()['num_people']);
+          $responseData['num_people'] = $dmn->get_capacity($request->get_json_params()['num_people']);
         }
 
         if(isset($request->get_json_params()['date'])) {
-          $responseData = $dmn->dates()->is_date_available($request->get_json_params()['date']);
+          $dates = $dmn->dates();
+          $responseData['dates'] = [
+            'list' => $dates->get_dates(),
+            'available' => $dates->is_date_available($request->get_json_params()['date'])
+          ];
         }
 
         if(isset($request->get_json_params()['time'])) {
-          $responseData = $dmn->times()->get_times();
+          $times = $dmn->times();
+          $responseData['times'] = [
+            'list' => $times->get_times(),
+            'available' => $times->is_time_available($request->get_json_params()['time'])
+          ];
+        }
+
+        // return submited deets so far
+        if(isset($request->get_query_params()['details'])) {
+          $responseData['details'] = $dmn->get_booking_details();
         }
 
         if(isset($request->get_query_params()['submit'])) {
           $responseData = $dmn->submit_booking();
           $responseDataKey = 'next';
-        }
-
-        // return submited deets so far
-        if(isset($request->get_query_params()['details'])) {
-          $responseData = $dmn->get_booking_details();
         }
 
         if($dmn->is_ready()) {
