@@ -165,15 +165,17 @@
 			add_settings_field(
 
 				'venue_id',
-				'DMN Venue Id',
+				'DMN Venue Id\'s',
 				[ $this, 'add_field' ],
 				'dmn-manager',
 				'dmn_settings',
 				[
 					'name'    => 'venue_id',
-					'type'    => 'text',
+					'type'    => 'textarea',
 					'setting' => 'dmn',
-					'note' => 'Provide you DMN Venue Id, this is required to start your custom widget',
+					'rows' => '3',
+					'cols' => '50',
+					'note' => 'Provide you DMN Venue Id\'s put each one on a newline and provide a venue name seperated by colon so [venue_name:venue_id],<br> this is required to start your custom widget',
 				]
 
 			);
