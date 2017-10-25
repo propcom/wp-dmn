@@ -133,6 +133,13 @@
     }
 
     /*
+    * @get_venue_id
+    */
+    public function get_venue_id ($name = null) {
+      return $this->dmn_api->get_venue_id($name);
+    }
+
+    /*
     * @forge
     */
     public static function forge () {

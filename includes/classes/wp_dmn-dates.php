@@ -110,8 +110,8 @@
       if(empty($this->dates)) return null;
 
       foreach($this->dates as $date) {
-        
-        if(strtotime($date->date) == strtotime($chosen_date)) {
+
+        if(strtotime($date->date) == strtotime($chosen_date) && $date->valid == true) {
           $date_available = true;
           break;
         }

@@ -73,7 +73,7 @@
 
         } else {
 
-          $this->venue_id = get_option('prop_dmn')['venue_id'];
+          $this->venue_id = current($this->get_venue_id());
 
           $this->setup_headers();
           $this->api_ready = true;
@@ -293,6 +293,32 @@
       if( isset(get_option ('prop_dmn')['venue_id']) && !get_option ('prop_dmn')['venue_id'] ) return false;
 
       return true;
+    }
+
+    /*
+    * @get_venue_id
+    */
+    public function get_venue_id ($name = null) {
+
+      if( isset(get_option ('prop_dmn')['venue_id']) && get_option ('prop_dmn')['venue_id'] ) {
+
+        $values = [];
+        $lines = explode(PHP_EOL, get_option('prop_dmn')['venue_id']);
+
+        if(!empty($lines)) {
+          foreach($lines as $line) {
+            $key = explode(':', $line)[0];
+            $value = explode(':', $line)[1];
+
+            $values[$key] = trim($value);
+          }
+        }
+
+        return (isset($values[$name]) ? $values[$name] : $values);
+      }
+
+      return null;
+
     }
 
     /*

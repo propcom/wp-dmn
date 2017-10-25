@@ -37,14 +37,14 @@
     * @exceeds_limit
     */
     public function exceeds_limit ($amount = 1) {
-      return ($amount > $this->max_num);
+      return ($this->max_num && $amount > $this->max_num);
     }
 
     /*
     * @matched_minimum
     */
     public function matched_minimum ($amount = 1) {
-      return ($amount > $this->min_num);
+      return ($this->min_num && $amount > $this->min_num);
     }
 
     /*
