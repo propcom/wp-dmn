@@ -57,7 +57,7 @@
     */
     private $api_data = null;
 
-    protected function __construct () {
+    protected function __construct ($venue_id = null) {
 
       $this->wp_args = [
         'method' => $this->api_method,
@@ -73,7 +73,11 @@
 
         } else {
 
-          $this->venue_id = current($this->get_venue_id());
+          if($venue_id) {
+            $this->venue_id = $venue_id;
+          } else {
+            $this->venue_id = current($this->get_venue_id());
+          }
 
           $this->setup_headers();
           $this->api_ready = true;
@@ -332,8 +336,8 @@
     * @forge
     * @params - Venue Id
     */
-    public static function forge () {
-      return new static();
+    public static function forge ($venue_id = null) {
+      return new static($venue_id);
     }
 
   }

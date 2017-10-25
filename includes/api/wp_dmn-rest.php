@@ -90,7 +90,7 @@
         $responseData = [];
         $responseDataKey = 'data';
 
-        $dmn = WP_DMN::forge();
+        $dmn = WP_DMN::forge( (isset($request->get_json_params()['venue']) ? $request->get_json_params()['venue'] : null) );
 
         // check body params - Add needed fields
         if(isset($request->get_json_params()['type'])) {
@@ -138,6 +138,14 @@
           $responseData['times'] = [
             'list' => $times->get_times(),
             'available' => $times->is_time_available($request->get_json_params()['time'])
+          ];
+        }
+
+        if(isset($request->get_json_params()['duration'])) {
+          $duration = $dmn->duration();
+          $responseData['duration'] = [
+            'list' => $duration->get_times(),
+            'available' => $duration->is_duration_available($request->get_json_params()['duration'])
           ];
         }
 
