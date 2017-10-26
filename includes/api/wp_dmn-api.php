@@ -152,6 +152,10 @@
 
             $this->response_headers = $api_repsonse['headers'];
 
+            if($this->api_data['code'] >= 400) {
+              throw new Wordpress_DMN_Api_Exception('DMN Server responded with '.$this->api_data['code'].' error, '.$this->api_data['message']);
+            }
+
           }
 
         }
