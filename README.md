@@ -66,7 +66,7 @@ if($dmn_api->is_ready() && $dmn_api->request()) {
 }
 ```
 
-**Get a lits of duration times**
+**Get a list of duration times**
 
 Time field is required in request so as to return a list of duration times.
 ```PHP
