@@ -95,16 +95,4 @@ if($dmn_api->is_ready() && $dmn_api->request()) {
   $web_link = $dmn_api->submit_booking();
 }
 ```
-Returns `null` if not enough inforamtion has been given to generate this link
-
-## API Docs
-
-You have access to some useful functions, here are just a few...
-
-`get_acceptance()` - Each request returns a set of actions, meaning it tells the user what will happen once they submit there details.
-
-`dates()` - Returns an instance of the Dates class, giving you access to the below functions:
-
-  - `get_dates()` returns all dates available for the current month.
-  - `get_from_to($from, $to)` filters out dates between 2 dates.
-  - `is_date_available($date)` returns a boolean based on of the given date is available or not.
+Returns `null` if not enough inforamtion has been given to generate this link.
