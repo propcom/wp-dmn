@@ -2,7 +2,7 @@
 
 Design My Night Plugin for wordpress
 
-```Version 1.0```
+[![GitHub version](https://badge.fury.io/gh/propcom%2Fwp-dmn.svg)](https://badge.fury.io/gh/propcom%2Fwp-dmn)
 
 ## Front End API Documentation
 
