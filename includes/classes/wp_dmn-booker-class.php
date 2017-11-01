@@ -22,6 +22,11 @@
     */
     private $availability;
 
+    /*
+    * @var return_url
+    */
+    private $return_url;
+
     public function __construct ($data = null) {
 
       $this->data = $data;
@@ -29,6 +34,10 @@
       if($this->data && isset($data->payload->validation)) {
         $this->availability = $data->payload;
       }
+
+      $this->return_url = array(
+        'return_url' => (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']
+      );
 
     }
 
@@ -146,7 +155,7 @@
       }
 
       if(isset($this->availability->next) && isset($this->availability->next->web)) {
-        return $this->availability->next->web;
+        return $this->availability->next->web.'?'.http_build_query($this->return_url);
       }
 
       return null;
