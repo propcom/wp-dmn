@@ -16,7 +16,7 @@
 	 * Plugin Name:       WordPress DMN Plugin
 	 * Plugin URI:        https://github.com/propcom/wp_dmn
 	 * Description:       Connects wordpress with DMN
-	 * Version:           1.1.6
+	 * Version:           1.0.0
 	 * Author:            Josh Grierson
 	 * Author URI:        https://github.com/propcom
 	 * License:           GPL-2.0+
