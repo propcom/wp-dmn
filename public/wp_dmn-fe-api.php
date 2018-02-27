@@ -22,7 +22,7 @@
     */
     private $booking_type_rules;
 
-    private function __construct ($venue_id = null) {
+    protected function __construct ($venue_id = null) {
       $this->dmn_api = Wordpress_DMN_Api::forge($venue_id);
 
       $this->dmn_post_fields = [];
@@ -142,8 +142,8 @@
     /*
     * @forge
     */
-    public static function forge () {
-      return new static();
+    public static function forge ($venue_id = null) {
+      return new static($venue_id);
     }
   }
 

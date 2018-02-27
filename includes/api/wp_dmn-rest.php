@@ -40,7 +40,7 @@
       if( $request ) {
 
         $responseData = [];
-        $dmn = WP_DMN::forge();
+        $dmn = WP_DMN::forge( (isset($request->get_query_params()['venue']) ? $request->get_query_params()['venue'] : null) );
 
         if($dmn->is_ready()) {
 
