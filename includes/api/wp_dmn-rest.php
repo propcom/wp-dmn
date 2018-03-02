@@ -123,6 +123,8 @@
 
         if(isset($request->get_json_params()['num_people'])) {
           $responseData['num_people'] = $dmn->get_capacity($request->get_json_params()['num_people']);
+        } else {
+          $responseData['num_people'] = $dmn->get_capacity();
         }
 
         if(isset($request->get_json_params()['date'])) {
