@@ -1,0 +1,11 @@
+{
+  "name": "propcom/wp-dmn",
+  "description": "Design my Night plugin for wordpress",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+        "name": "Joshua Grierson",
+        "email": "joshua.grierson@propcom.co.uk"
+    }
+  ]
+}
